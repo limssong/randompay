@@ -56,7 +56,7 @@ pnpm start
 
 이 프로젝트는 Vercel을 통해 자동 배포됩니다.
 
-### Vercel 자동 배포 설정
+### Vercel 자동 배포 설정 (권장)
 
 1. [Vercel](https://vercel.com)에 GitHub 계정으로 로그인
 2. "New Project" 클릭
@@ -64,23 +64,15 @@ pnpm start
 4. 빌드 설정은 자동으로 감지됩니다 (Next.js)
 5. "Deploy" 클릭
 
-**중요**: GitHub에 푸시할 때마다 자동으로 배포되도록 하려면:
-- Vercel 대시보드에서 프로젝트 설정
-- "Git" 탭에서 자동 배포가 활성화되어 있는지 확인
+**중요**: GitHub에 푸시할 때마다 자동으로 배포됩니다!
+- Vercel이 GitHub 저장소와 연결되면 자동으로 배포가 설정됩니다
 - `main` 또는 `master` 브랜치에 푸시하면 자동 배포됩니다
+- 별도의 GitHub Actions 설정이 필요 없습니다
 
-### GitHub Actions를 통한 배포 (선택사항)
+### GitHub Actions 빌드 체크
 
-GitHub Actions를 사용하려면 Vercel Secrets를 설정해야 합니다:
-
-1. Vercel 대시보드에서 프로젝트 설정 → "Settings" → "General"
-2. "Project ID"와 "Org ID" 복사
-3. Vercel CLI로 토큰 생성: `vercel login` 후 `vercel link`
-4. GitHub 저장소 → Settings → Secrets and variables → Actions
-5. 다음 Secrets 추가:
-   - `VERCEL_TOKEN`: Vercel 토큰
-   - `VERCEL_ORG_ID`: Organization ID
-   - `VERCEL_PROJECT_ID`: Project ID
+프로젝트에는 빌드가 성공하는지 확인하는 GitHub Actions 워크플로우가 포함되어 있습니다.
+이 워크플로우는 빌드만 확인하며, 실제 배포는 Vercel이 자동으로 처리합니다.
 
 ### 수동 배포
 
@@ -88,6 +80,13 @@ GitHub Actions를 사용하려면 Vercel Secrets를 설정해야 합니다:
 pnpm build
 vercel --prod
 ```
+
+### 문제 해결
+
+배포 에러가 발생한다면:
+1. Vercel 대시보드에서 프로젝트 설정 확인
+2. 빌드 로그 확인
+3. `pnpm install` 및 `pnpm build`가 로컬에서 성공하는지 확인
 
 ## 📄 라이선스
 
