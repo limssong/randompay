@@ -30,6 +30,31 @@ export default function Home() {
     const newNames = [...names]
     newNames[index] = value
     setNames(newNames)
+    setError('')
+  }
+
+  const checkDuplicateNames = (): string[] => {
+    const duplicates: string[] = []
+    const nameCount: { [key: string]: number } = {}
+    
+    names.forEach(name => {
+      const trimmedName = name.trim()
+      if (trimmedName) {
+        nameCount[trimmedName] = (nameCount[trimmedName] || 0) + 1
+      }
+    })
+    
+    Object.keys(nameCount).forEach(name => {
+      if (nameCount[name] > 1) {
+        duplicates.push(name)
+      }
+    })
+    
+    return duplicates
+  }
+
+  const hasDuplicateNames = (): boolean => {
+    return checkDuplicateNames().length > 0
   }
 
   const validateInputs = (): boolean => {
@@ -68,6 +93,11 @@ export default function Home() {
     }
     if (names.some(name => name.trim() === '')) {
       setError('모든 인원의 이름을 입력해주세요.')
+      return false
+    }
+    if (hasDuplicateNames()) {
+      const duplicates = checkDuplicateNames()
+      setError(`중복된 이름이 있습니다: ${duplicates.join(', ')}`)
       return false
     }
     return true
@@ -273,10 +303,16 @@ export default function Home() {
 
           {error && <div className={styles.error}>{error}</div>}
 
+          {hasDuplicateNames() && (
+            <div className={styles.warning}>
+              ⚠️ 중복된 이름이 있습니다. 각 인원의 이름은 고유해야 합니다.
+            </div>
+          )}
+
           <button
             className={styles.distributeButton}
             onClick={handleDistribute}
-            disabled={memberCount === 0 || isCounting}
+            disabled={memberCount === 0 || isCounting || hasDuplicateNames()}
           >
             배분하기
           </button>
