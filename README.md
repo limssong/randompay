@@ -54,9 +54,17 @@ pnpm start
 
 ## 🌐 배포
 
-이 프로젝트는 Vercel을 통해 자동 배포됩니다.
+이 프로젝트는 GitHub Pages와 Vercel 모두에서 배포할 수 있습니다.
 
-### Vercel 자동 배포 설정 (권장)
+### GitHub Pages 배포 (자동)
+
+1. GitHub 저장소 → Settings → Pages
+2. Source를 "GitHub Actions"로 선택
+3. `main` 또는 `master` 브랜치에 푸시하면 자동으로 배포됩니다
+
+**배포 URL**: `https://[사용자명].github.io/randompay/`
+
+### Vercel 자동 배포 (선택사항)
 
 1. [Vercel](https://vercel.com)에 GitHub 계정으로 로그인
 2. "New Project" 클릭
@@ -67,12 +75,10 @@ pnpm start
 **중요**: GitHub에 푸시할 때마다 자동으로 배포됩니다!
 - Vercel이 GitHub 저장소와 연결되면 자동으로 배포가 설정됩니다
 - `main` 또는 `master` 브랜치에 푸시하면 자동 배포됩니다
-- 별도의 GitHub Actions 설정이 필요 없습니다
 
 ### GitHub Actions 빌드 체크
 
 프로젝트에는 빌드가 성공하는지 확인하는 GitHub Actions 워크플로우가 포함되어 있습니다.
-이 워크플로우는 빌드만 확인하며, 실제 배포는 Vercel이 자동으로 처리합니다.
 
 ### 수동 배포
 
